@@ -6,6 +6,7 @@ TagManager:
   tags:
   - redteam
   - blueteam
+  - ball
   layers:
   - Default
   - TransparentFX
