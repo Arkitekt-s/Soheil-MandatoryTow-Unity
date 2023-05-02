@@ -10,6 +10,7 @@ public class ScoreBlue : MonoBehaviour
     public TextMeshProUGUI scoreBlueText;
     public AudioSource audioSource;
     public AudioClip goalSound;
+    public TextMeshProUGUI goalTextB;
     private const string SCORE_KEY = "scoreBlue";
 
     void OnTriggerEnter(Collider other)
@@ -18,6 +19,16 @@ public class ScoreBlue : MonoBehaviour
         {
             scoreBlue++;
             scoreBlueText.text = scoreBlue.ToString();
+            //HIDE THE TEXT THAND SHOW IT AGAIN AND HID IT AGAIN
+            goalTextB.gameObject.SetActive(true);
+            goalTextB.text = "GOAL!!!";
+
+            StartCoroutine(HideGoalText());
+            IEnumerator HideGoalText()
+            {
+                yield return new WaitForSeconds(5);
+                goalTextB.gameObject.SetActive(false);
+            }
             PlayerPrefs.SetInt(SCORE_KEY, scoreBlue);
             if (goalSound != null)
             {
@@ -27,6 +38,14 @@ public class ScoreBlue : MonoBehaviour
             {
                 Debug.LogWarning("No goal sound found!");
             }// Save the score to PlayerPrefs
+        }
+    }
+    //move ball to centre after goal
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("ball"))
+        {
+            other.gameObject.transform.position = new Vector3(0f, 0.5f, 0f);
         }
     }
 
