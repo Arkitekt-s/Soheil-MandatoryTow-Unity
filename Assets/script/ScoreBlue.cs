@@ -29,6 +29,8 @@ public class ScoreBlue : MonoBehaviour
                 yield return new WaitForSeconds(5);
                 goalTextB.gameObject.SetActive(false);
             }
+            
+            
             PlayerPrefs.SetInt(SCORE_KEY, scoreBlue);
             if (goalSound != null)
             {
