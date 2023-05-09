@@ -21,7 +21,7 @@ public class ScoreBlue : MonoBehaviour
             scoreBlueText.text = scoreBlue.ToString();
             //HIDE THE TEXT THAND SHOW IT AGAIN AND HID IT AGAIN
             goalTextB.gameObject.SetActive(true);
-            goalTextB.text = "GOAL!!!";
+            goalTextB.text = "GOAL!";
 
             StartCoroutine(HideGoalText());
             IEnumerator HideGoalText()
@@ -42,6 +42,7 @@ public class ScoreBlue : MonoBehaviour
             }// Save the score to PlayerPrefs
         }
     }
+    
     //move ball to centre after goal
     void OnTriggerExit(Collider other)
     {
@@ -49,6 +50,7 @@ public class ScoreBlue : MonoBehaviour
         {
             other.gameObject.transform.position = new Vector3(0f, 0.5f, 0f);
         }
+        
     }
 
     private void Start()
@@ -56,6 +58,8 @@ public class ScoreBlue : MonoBehaviour
         // Load the score from PlayerPrefs
         scoreBlue = PlayerPrefs.GetInt(SCORE_KEY, 0);
         scoreBlueText.text = scoreBlue.ToString();
+        //reset score
+        PlayerPrefs.DeleteKey(SCORE_KEY);
     }
 }
 
